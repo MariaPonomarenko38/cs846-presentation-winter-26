@@ -82,3 +82,37 @@ Bad Example:
 
 Review this PR and suggest all possible improvements.
  -->
+
+
+ <!--
+<<<Blog1: Unlocking the full power of Copilot code review: Master your instructions files>>>
+
+
+Guideline 2: Use Structured Rules (Headings + Bullet Points)
+Description
+
+Structure your code review prompts using headings and bullet points instead of long paragraphs.
+
+Reasoning
+
+The blog emphasizes that structure improves how Copilot processes instructions. LLMs respond better to clear sections and enumerated rules. This reduces ambiguity and improves comment consistency.
+
+Good Example:
+Review Focus
+
+Correctness
+
+Performance regressions
+
+Security risks
+
+Constraints
+
+Do not suggest formatting-only changes
+
+Assume this is production code
+
+Bad Example:
+
+This is production code and I want you to review it carefully for correctness performance and security but also keep in mind not to change formatting and just generally give useful suggestions.
+ -->
