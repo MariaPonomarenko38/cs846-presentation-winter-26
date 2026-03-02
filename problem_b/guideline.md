@@ -148,3 +148,60 @@ Review this entire 10,000-line diff at once.
 
 (Leads to shallow or degraded analysis.)
  -->
+
+
+
+
+
+
+
+
+ <!--
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<FINAL GUIDELINE>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+Guideline: Use a Structured, Context-First Review Prompt
+Description
+
+When prompting an LLM for code review, first request a structured summary of the pull request (intent, affected components, high-risk areas), then provide explicitly scoped review criteria (e.g., correctness, security, performance) using clear bullet-point instructions.
+
+Reasoning
+
+This guideline merges the strongest findings across sources:
+
+Rethinking Code Review Workflows (Empirical Study):
+Developers preferred AI-led summaries before issue detection to reduce cognitive load and improve contextual understanding.
+
+Automated Code Review in Practice:
+Unfocused, noisy feedback increases PR closure time and reduces trust. Review criteria must be scoped to high-impact areas.
+
+Copilot Instructions Blog:
+Structured prompts (headings + bullet points) improve consistency and reduce ambiguity in LLM outputs.
+
+Together, these findings show that effective LLM-assisted code review requires:
+
+Context understanding first
+
+Clear scoping of review focus
+
+Structured prompt formatting
+
+Good Example
+You are reviewing a pull request.
+
+Step 1 — Context Summary
+- Summarize the intent of the PR.
+- Identify affected components.
+- Highlight complex or high-risk areas.
+
+Step 2 — Focused Review
+Review only for:
+- correctness
+- security risks
+- performance regressions
+
+Do not suggest stylistic changes unless they affect correctness.
+Bad Example
+Review this pull request and suggest improvements.
+ -->
