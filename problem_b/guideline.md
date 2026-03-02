@@ -183,6 +183,8 @@ Together, these findings show that effective LLM-assisted code review requires:
 
 ### Good Example
 
+```text
+
 You are reviewing a pull request.
 
 **Step 1 — Context summary**
@@ -200,13 +202,16 @@ Review only for:
 - performance regressions  
 
 Do not suggest stylistic changes unless they affect correctness.
+```
 
 ### Bad Example
 
+```text
 Review this pull request and suggest improvements.
+```
 
-
-
+---
+---
 
 
 ## Guideline: Explicitly State Assumptions and Non-Goals
