@@ -36,6 +36,47 @@ Describe the task clearly and precisely.
 
 ---
 
+### Problem B: Backend PR Review and Comment Validation
+
+**Model to Use:** GPT-4.1
+
+**Shared Context (for B1-B4):**  
+Use the PR description and diff as the source of intent, constraints, boundaries, and out-of-scope items. Keep each answer scoped to its task and avoid repeating points across tasks.
+
+**PR To Review:** [Add user helper module and seed data with tests #16](https://github.com/U70-TK/cs846-presentation-winter-26/pull/16) on branch [feat-user-helper](https://github.com/U70-TK/cs846-presentation-winter-26/tree/feat-user-helper)
+
+**Diff and Commit Details:** [https://patch-diff.githubusercontent.com/raw/U70-TK/cs846-presentation-winter-26/pull/16.patch](https://patch-diff.githubusercontent.com/raw/U70-TK/cs846-presentation-winter-26/pull/16.patch)
+
+#### Problem B1: Security and Data Exposure
+
+**Task Description:**  
+Review only security/trust-boundary risks: auth boundaries, sensitive data exposure, internal ID leakage, input handling, and URL/external-call safety. For each risk, include: attack/failure path, impacted endpoint/helper, and mitigation.
+
+#### Problem B2: Test Adequacy
+
+**Task Description:**  
+Review only test quality. Identify brittle/misleading tests, missing edge cases, and gaps between intended behavior and coverage. Propose the minimum additional tests needed before merge.
+
+#### Problem B3: Peer Review Comment Validation
+
+**Task Description:**  
+Your peer reviewer `wangtkuan-crypto` raised the following comment:
+
+`Security review summary: all endpoints appear to be in critical danger. Although each route declares Depends(auth.get_current_user), the returned value is assigned to _ and discarded, which means authentication is effectively not enforced. As implemented, every endpoint should be treated as unauthenticated and vulnerable to unauthorized access until this is fixed.`
+
+and in `problem_b/user_helpers.py` line 139 - 142:
+
+`Depends(auth.get_current_user) is assigned to _, so the dependency result is discarded and auth isn’t actually enforced.`
+
+You are unsure whether this comment is accurate. Use an LLM to validate the comment against the PR description, diff, and code in `problem_b/`. Classify it as `Accurate`, `Partially Accurate`, or `Inaccurate`, then provide brief reasoning and a recommended follow-up action.
+
+#### Problem B4: Correctness and Constraint Fit
+
+**Task Description:**  
+After completing B1 and B2, review functional correctness and PR-constraint alignment. List findings with severity (`Blocker`, `Major`, `Minor`, `Question`) and include: impacted file(s), violated requirement/constraint, and minimal fix. End with a merge decision (`Approve`, `Request Changes`, or `Reject`) based on all prior considerations.
+
+---
+
 ### Problem C: Pull Request Supply Chain Review (5 mins)
 
 **Model to use:** GPT-4.1 
@@ -129,4 +170,3 @@ The diff for this PR can be found at: [https://patch-diff.githubusercontent.com/
 [2] 
 
 ---
-
