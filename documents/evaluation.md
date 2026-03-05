@@ -49,16 +49,27 @@ Describe the evaluation criteria clearly and precisely.
 
 ### Problem C: Pull Request Supply Chain Review
 
-**Evaluation Description:**  
-This problem will not likely be resolved by simply letting LLMs inspect the dependency files before and after PR. LLMs are not designed to reliably reason over large, highly-structured lockfile. A reasonable process is to apply dependency management tools like Dependabot and/or dependency-review-action@v4 for identifying vulnerable packages. 
-In this PR, the package "multer": "2.1.0" is changed to "multer": "2.0.2". 
+**Good Example:**
+Fork the current repository, then go to:
 
-However, multer package versions < 2.1.0 are known to be severely vulnerable to Denial of Service attacks (CVE-2026-3304). More details can be found on the National Vulnerability Database (NVD)'s official website [https://nvd.nist.gov/vuln/detail/CVE-2026-3304](https://nvd.nist.gov/vuln/detail/CVE-2026-3304), and from the table below:
+Settings -> Security -> Advanced Security -> Dependabot -> Enable Dependabot Alerts -> Enable.
+
+Trigger a push on main branch, then go to:
+
+Security -> Vulnerability Alerts -> Dependabot.
+
+**Bad Prompt Example:**
+
+`You are an experienced coding agent, please verify the dependency versions for me: [path-to-file].`
+
+**Good Example Output:**
+
+In Security -> Vulnerability Alerts -> Dependabot, this vulnerabile version of package will show up:
 
 |             | CVE-2026-3304           |
 |-------------|-------------------------------------|
 | Severity   | High |
-| CVSS Score | 8.7 |
+| CVSS Score | 8.7/10 |
 |  Description  | Multer is a node.js middleware for handling `multipart/form-data`. A vulnerability in Multer prior to version 2.1.0 allows an attacker to trigger a Denial of Service (DoS) by sending malformed requests, potentially causing resource exhaustion. Users should upgrade to version 2.1.0 to receive a patch. No known workarounds are available.                                    |
 | NVD Published Date | 02/27/2026 |
 | Attack Vector | Network |
@@ -66,9 +77,25 @@ However, multer package versions < 2.1.0 are known to be severely vulnerable to 
 | Attack Requirement | None |
 | Privileges Required | None | 
 | User Interaction | None |
-| Related CWE | CWE-459: Incomplete Cleanup | 
+| Related CWE | CWE-459: Incomplete Cleanup |
 
-Any approach that successfully identified this vulnerable dependency is a correct solution. 
+**Bad Example Output:**
+
+GPT 4.1: 
+```
+......
+
+Conclusion & recommendations
+* The “after” lock file is consistent with the updated package.json and accurately captures all newly introduced dev dependencies.
+* npm ci runs without errors, so the lock file is valid and usable.
+* There’s nothing broken in the dependency update itself; the only “issue” is that running npm test returns an error because there are no tests. If you plan to use Jest, add test files or tweak the test script.
+```
+
+**Why it's bad:**
+
+This problem will not likely be resolved by simply letting LLMs inspect the dependency files before and after PR. LLMs are not designed to reliably reason over large, highly-structured lockfile. In this example, multer package versions < 2.1.0 are known to be severely vulnerable to Denial of Service attacks (CVE-2026-3304). But the Copilot failed to capture it.
+
+More details can be found on the National Vulnerability Database (NVD)'s official website [https://nvd.nist.gov/vuln/detail/CVE-2026-3304](https://nvd.nist.gov/vuln/detail/CVE-2026-3304).
 
 ---
 
