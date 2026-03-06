@@ -94,11 +94,11 @@ Perform a Pull Request review.
 
 ### Guideline 2: Use Automated CI Gates [8]
 
-#### Guideline 2.1: Continue Using Static Analysis Tools [11]
+#### Guideline 2.1: Static Analysis Tool together with LLM [11]
 
 **Description:**
 
-Integrate static analysis tools (e.g., linters, type checkers, security scanners) into your CI pipeline and configure them as mandatory checks before pull request merge. GitHub CI supports assorted static analysis tool integrations like CodeQL (primarily for security), Semgrep (pattern based bug finding with customized rules), and your ecosystem’s usual linters/type checkers (ESLint/tsc, pylint/mypy, etc.). 
+Integrate static analysis tools (e.g., linters, type checkers, security scanners) into your CI pipeline and configure them as mandatory checks before pull request merge. GitHub CI supports assorted static analysis tool integrations like CodeQL (primarily for security), Semgrep (pattern based bug finding with customized rules), and your ecosystem’s usual linters/type checkers (ESLint/tsc, pylint/mypy, etc.). Compare the output given by the Static Analysis Tool along with the output from the LLM and use the tool findings to ground, verify, or challenge the LLM’s review comments rather than treating the LLM as the sole reviewer.
 
 **Reasoning:**
 
@@ -106,14 +106,16 @@ Unlike LLMs, most static analysis tools like Semgrep, CodeQL, etc. are determini
 
 **Good Example:**
 
+An good example of static analysis tool pattern definition file using Semgrep could be found in `.github/semgrep.yml`. 
+
+However, it should be noted that this configuration is illustrative rather than exhaustive. Please use the LLM to generate more suitable patterns, you can check the static analysis result using our example at [PR #11 -> Files Changed](https://github.com/U70-TK/cs846-presentation-winter-26/pull/11/changes).
+
 Customized static analysis patterns should neither be overly broad nor overly strict.
 
 - If it's too broad, it may trigger too many false positives. 
 - If it's too strict, it likely will not catch anything. 
 
 A good static analysis pattern definition should find a balance in between, and match project-specific conventions and expectations. 
-
-A static analysis tool pattern definition file template for Semgrep could be found in `.github/semgrep.yml`, please use the LLM to generate more suitable patterns and see the results if you want, or you can check the static analysis result using our template at [PR #11 -> Files Changed](https://github.com/U70-TK/cs846-presentation-winter-26/pull/11/changes).
 
 **Bad Example:**
 

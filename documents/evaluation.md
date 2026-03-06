@@ -283,7 +283,6 @@ In Security -> Vulnerability Alerts -> Dependabot, this vulnerabile version of p
 
 **Bad Example Output:**
 
-GPT 4.1: 
 ```
 ......
 
