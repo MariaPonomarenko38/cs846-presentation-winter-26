@@ -6,7 +6,7 @@
 
 ## 1. Example Problems
 
-### Problem A: Understanding the Code Review Process
+### Problem A: Understanding the Code Review Process [15 mins]
 **Model to Use:** GPT-4.1
 ### Problem Description
 
@@ -15,7 +15,7 @@ You are given crash-dedup, which deduplicates crash reports from distributed sys
 Setup: run once before starting: ```pip install -r requirements.txt```
 Use the **GPT-4.1** model for this problem
 
-### Problem A_1: Verify the Program
+### Problem A_1: Verify the Program [2 mins]
 
 **Task Description:**  
 Execute the existing test suite for the project. Record the number of tests that pass and fail and document any error messages or failures observed during execution. For testing, use python -m pytest tests/ -v.
@@ -25,7 +25,7 @@ See all files inside the ``crash_dedup/`` folder and the ``tests/`` folder in th
 
 ---
 
-### Problem A_2: Code Review: Identify Bugs and Issues with GitHub Copilot
+### Problem A_2: Code Review: Identify Bugs and Issues with GitHub Copilot [6 mins]
 
 **Task Description:**  
 Use GitHub Copilot Chat to review all files in the crash_dedup/ directory. Ask Copilot to review the code as an experienced software engineer would in a pull request. Your report should document the AI’s findings, including an overall verdict (Approve, Request Changes, or Reject), a list of identified bugs with their locations and proposed fixes, any security vulnerabilities, and missing or insufficient documentation. 
@@ -36,7 +36,7 @@ See all files inside the ``crash_dedup/`` folder and the ``tests/`` folder in th
 
 ---
 
-### Problem A_3: Code Review: Quality & Improvement Analysis
+### Problem A_3: Code Review: Quality & Improvement Analysis [7 mins]
 
 **Task Description:**  
 Use GitHub Copilot Chat to review the code in the crash_dedup/ directory. Ask Copilot to evaluate the correctness, code quality, comment quality, code style, and security aspects of the code. For each issue identified, categorize it as Bug Fix, Documentation, and indicate any cases that cannot be detected by the Copilot prompt.
@@ -46,7 +46,7 @@ See all files inside the ``crash_dedup/`` folder and the ``tests/`` folder in th
 
 ---
 
-### Problem B: Backend PR Review and Comment Validation
+### Problem B: Backend PR Review and Comment Validation [15 mins]
 
 **Model to Use:** GPT-4.1
 
@@ -57,17 +57,29 @@ Use the PR description and diff as the source of intent, constraints, boundaries
 
 **Diff and Commit Details:** [https://patch-diff.githubusercontent.com/raw/U70-TK/cs846-presentation-winter-26/pull/16.patch](https://patch-diff.githubusercontent.com/raw/U70-TK/cs846-presentation-winter-26/pull/16.patch)
 
-#### Problem B1: Security and Data Exposure
+#### Problem B1: Security and Data Exposure [3 mins]
 
 **Task Description:**  
 Review only security/trust-boundary risks: auth boundaries, sensitive data exposure, internal ID leakage, input handling, and URL/external-call safety. For each risk, include: attack/failure path, impacted endpoint/helper, and mitigation.
 
-#### Problem B2: Test Adequacy
+**Starter Code:**  
+**PR To Review:** [Add user helper module and seed data with tests #16](https://github.com/U70-TK/cs846-presentation-winter-26/pull/16) on branch [feat-user-helper](https://github.com/U70-TK/cs846-presentation-winter-26/tree/feat-user-helper)
+
+**Diff and Commit Details:** [https://patch-diff.githubusercontent.com/raw/U70-TK/cs846-presentation-winter-26/pull/16.patch](https://patch-diff.githubusercontent.com/raw/U70-TK/cs846-presentation-winter-26/pull/16.patch)
+
+#### Problem B2: Test Adequacy [4 mins]
 
 **Task Description:**  
 Review only test quality. Identify brittle/misleading tests, missing edge cases, and gaps between intended behavior and coverage. Propose the minimum additional tests needed before merge.
 
-#### Problem B3: Peer Review Comment Validation
+**Starter Code:**  
+**PR To Review:** [Add user helper module and seed data with tests #16](https://github.com/U70-TK/cs846-presentation-winter-26/pull/16) on branch [feat-user-helper](https://github.com/U70-TK/cs846-presentation-winter-26/tree/feat-user-helper)
+
+**Diff and Commit Details:** [https://patch-diff.githubusercontent.com/raw/U70-TK/cs846-presentation-winter-26/pull/16.patch](https://patch-diff.githubusercontent.com/raw/U70-TK/cs846-presentation-winter-26/pull/16.patch)
+
+**Test Files:** `\problem_b\tests` on branch [feat-user-helper](https://github.com/U70-TK/cs846-presentation-winter-26/tree/feat-user-helper)
+
+#### Problem B3: Peer Review Comment Validation [5 mins]
 
 **Task Description:**  
 Your peer reviewer `wangtkuan-crypto` raised the following comment:
@@ -80,10 +92,22 @@ and in `problem_b/user_helpers.py` line 139 - 142:
 
 You are unsure whether this comment is accurate. Use an LLM to validate the comment against the PR description, diff, and code in `problem_b/`. Classify it as `Accurate`, `Partially Accurate`, or `Inaccurate`, then provide brief reasoning and a recommended follow-up action.
 
-#### Problem B4: Correctness and Constraint Fit
+**Starter Code:**  
+**PR To Review:** [Add user helper module and seed data with tests #16](https://github.com/U70-TK/cs846-presentation-winter-26/pull/16) on branch [feat-user-helper](https://github.com/U70-TK/cs846-presentation-winter-26/tree/feat-user-helper)
+
+**Diff and Commit Details:** [https://patch-diff.githubusercontent.com/raw/U70-TK/cs846-presentation-winter-26/pull/16.patch](https://patch-diff.githubusercontent.com/raw/U70-TK/cs846-presentation-winter-26/pull/16.patch)
+
+**Code:** `\problem_b\user_helpers.py` on branch [feat-user-helper](https://github.com/U70-TK/cs846-presentation-winter-26/tree/feat-user-helper)
+
+#### Problem B4: Correctness and Constraint Fit [3 mins]
 
 **Task Description:**  
 After completing B1 and B2, review functional correctness and PR-constraint alignment. List findings with severity (`Blocker`, `Major`, `Minor`, `Question`) and include: impacted file(s), violated requirement/constraint, and minimal fix. End with a merge decision (`Approve`, `Request Changes`, or `Reject`) based on all prior considerations.
+
+**Starter Code:**  
+**PR To Review:** [Add user helper module and seed data with tests #16](https://github.com/U70-TK/cs846-presentation-winter-26/pull/16) on branch [feat-user-helper](https://github.com/U70-TK/cs846-presentation-winter-26/tree/feat-user-helper)
+
+**Diff and Commit Details:** [https://patch-diff.githubusercontent.com/raw/U70-TK/cs846-presentation-winter-26/pull/16.patch](https://patch-diff.githubusercontent.com/raw/U70-TK/cs846-presentation-winter-26/pull/16.patch)
 
 ---
 
