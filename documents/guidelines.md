@@ -300,8 +300,7 @@ Before judging any code, first establish what it is supposed to do. Read the doc
 ---
 
 **Reasoning:**
-Reasoning (Cihan et al., 2025):
- - GPT-4o assessed code correctness 68.5% of the time when given a problem description, dropping significantly without it
+ - GPT-4o assessed code correctness 68.5% of the time when given a problem description, dropping significantly without it [13]
  - Code correction ratio improved by up to 23 percentage points simply by including intent in the prompt
  - Without a specification, reviewers default to syntactic checks and miss semantic failures, code that runs but does the wrong thing
  - The same gap applies to human reviewers who skip reading comments before assessing logic
@@ -311,8 +310,6 @@ Reasoning (Cihan et al., 2025):
 ---
 
 **Examples:**
-
-**Good Example:**
 
 **Good Example: context included:**
 
@@ -338,16 +335,15 @@ Review the generate () function in fingerprint.py and tell me if there are any b
 **Description:**
 
 Every issue you find should be reported in a consistent format that includes the location of the problem, its description, the reason it matters, and the steps to resolve it. A vague comment like this looks unsafe is not actionable. A reviewer reading your report, or a developer receiving your feedback, needs all four pieces to understand and act on the finding. Use this template for every finding:
-[Location] → [What] → [Why it matters] → [Suggested fix]
+[Location] → [What] → [Why_it_matters] → [Suggested_fix]
 
 ---
 
 **Reasoning:**
-Reasoning (Haider et al., 2024):
- - Practitioners rate review comments on three dimensions: Relevance, Information completeness, and Explanation clarity
- - Comments missing any one of these three dimensions are considered low quality by real developers
- - Structured comments reduce back-and-forth between reviewer and author; the fix is self-contained
- - When asking Copilot to review code, requesting this format in your prompt directly improves the quality of its output
+ - Practitioners rate review comments on three dimensions: Relevance, Information completeness, and Explanation clarity [15].
+ - Comments missing any one of these three dimensions are considered low quality by real developers.
+ - Structured comments reduce back-and-forth between reviewer and author; the fix is self-contained.
+ - When asking Copilot to review code, requesting this format in your prompt directly improves the quality of its output.
 
  *Example:*
 storage.py: search_by_error_type(), line 79
@@ -360,8 +356,6 @@ storage.py: search_by_error_type(), line 79
 
 **Examples:**
 
-**Good Example:**
-
 **Good Example: Structured Review:**
 
 ```text
@@ -370,7 +364,6 @@ storage.py: search_by_error_type(), line 79
  - Group findings under clear headings so critical issues are not buried alongside minor ones 
  - Ask for a severity (Critical / High / Medium / Low) label on each finding so issues can be triaged by importance 
  - Request a concrete verdict at the end to force an overall judgment on the code
-
 
 ```
 
@@ -400,11 +393,10 @@ Label each finding with its category and priority:
 ---
 
 **Reasoning:**
-Reasoning (Collante et al., 2025):
- - Analysis of 1,600 GPT-assisted pull requests found developers structure their reviews around three task types: Enhancement (60%), Bug Fix (26%), and Documentation (12%)
- - Conflating these leads to unfocused reviews where critical bugs get buried alongside minor style suggestions
- - Labelling by category and priority forces the reviewer to make an explicit triage decision on every finding
- - It also helps the author of the code understand what must be addressed before merging versus what is optional
+ - Analysis of 1,600 GPT-assisted pull requests found developers structure their reviews around three task types: Enhancement (60%), Bug Fix (26%), and Documentation (12%) [14].
+ - Conflating these leads to unfocused reviews where critical bugs get buried alongside minor style suggestions.
+ - Labelling by category and priority forces the reviewer to make an explicit triage decision on every finding.
+ - It also helps the author of the code understand what must be addressed before merging versus what is optional.
 
 
 ---
@@ -437,14 +429,10 @@ Description: Before accepting any change suggested by Copilot, check that it doe
 ---
 
 **Reasoning:**
-Reasoning (Cihan et al., 2025):
- - Up to 24.8% of AI-suggested code improvements introduced regressions, breaking previously correct behaviors
- - Exception handling fixes are the most common regression source, adding try/except can mask real failures
- - Fixes involving shared state (like the unbounded_cache in deduplicator.py) can affect multiple code paths in unexpected ways
- - A fix that passes a casual read but breaks a passing test is not ready to merge, regardless of how confident Copilot sounds
-
-
-
+ - Up to 24.8% of AI-suggested code improvements introduced regressions, breaking previously correct behaviors [13].
+ - Exception handling fixes are the most common regression source, adding try/except can mask real failures.
+ - Fixes involving shared state (like the unbounded_cache in deduplicator.py) can affect multiple code paths in unexpected ways.
+ - A fix that passes a casual read but breaks a passing test is not ready to merge, regardless of how confident Copilot sounds.
 ---
 
 **Examples:**
@@ -452,13 +440,11 @@ Reasoning (Cihan et al., 2025):
 **Good Example: Suggested Verification:**
 
 ```text
- - Ask Copilot to state the regression risk for every fix it suggests: Low, Medium, or High 
- - Ask which currently-passing tests could break if each fix is applied 
- - Request a correctness section that tests each function against all valid inputs, not just the happy path 
- - Ask for an improvement plan that separates what to change from what risk that the change carries 
- - Ask Copilot to flag any fix that requires human judgment and cannot be resolved automatically
-
-
+ - Ask Copilot to state the regression risk for every fix it suggests: Low, Medium, or High.
+ - Ask which currently-passing tests could break if each fix is applied.
+ - Request a correctness section that tests each function against all valid inputs, not just the happy path .
+ - Ask for an improvement plan that separates what to change from what risk that the change carries.
+ - Ask Copilot to flag any fix that requires human judgment and cannot be resolved automatically.
 ```
 
 **Bad Example: No Verification**
@@ -473,12 +459,10 @@ Fix all the bugs you found in crash_dedup/ project
 **Description:**
 
 Even with well-structured prompts and guidelines, certain issues cannot be fully resolved by AI alone:
- - Cihan et al. (2025) found LLMs failed to correctly assess code correctness in roughly 1 in 3 cases, leading to their proposed Human-in-the-Loop process
- - Szymanski et al. (2024) found that LLM-judge agreement with subject-matter experts ranges only 60-68% on domain-specific tasks
- - Wang et al. (2025) showed LLMs fall short on security, architecture, and regulatory decisions even when prompts are well-structured
+ - Cihan et al. [13] found LLMs failed to correctly assess code correctness in roughly 1 in 3 cases, leading to their proposed Human-in-the-Loop process.
+ - Szymanski et al. [16] found that LLM-judge agreement with subject-matter experts ranges only 60-68% on domain-specific tasks.
+ - Wang et al. [17] showed LLMs fall short on security, architecture, and regulatory decisions even when prompts are well-structured
  - Copilot can detect the symptoms of an issue, but a human must assess the context, risk, and consequences before making the final call
-
-
 ---
 
 **Tasks for Human Evaluation:**
