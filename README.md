@@ -1,6 +1,6 @@
 # CS846 Presentation - CodeReview / PR
 
-This repository contains guidelines, example problems, and evaluation documents for CS 846 - LLMs for Software Engineering (Winter 2026) Week 10: CodeReview / PR. 
+This repository contains guidelines, example problems, and evaluation documents for CS 846 - LLMs for Software Engineering (Winter 2026)   Week 10: CodeReview / PR. 
 
 ## Group Members
 - Neel Sanjaybhai Faganiya
